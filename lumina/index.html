@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMINA — AI Skin Intelligence Advisor</title>
+  <meta name="description" content="LUMINA uses advanced AI to analyze your skin, prescribe personalized routines, and recommend the right products for your unique face." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">LUMINA</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#scan">Skin Scan</a></li>
+      <li><a href="#results">Analysis</a></li>
+      <li><a href="#exercises">Face Yoga</a></li>
+      <li><a href="#diary">Skin Diary</a></li>
+      <li><a href="#pricing">Plans</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn-ghost" onclick="showLogin()">Sign In</button>
+      <button class="btn-primary" onclick="scrollToScan()">Try Free</button>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#scan" onclick="toggleMenu()">Skin Scan</a>
+    <a href="#results" onclick="toggleMenu()">Analysis</a>
+    <a href="#exercises" onclick="toggleMenu()">Face Yoga</a>
+    <a href="#diary" onclick="toggleMenu()">Skin Diary</a>
+    <a href="#pricing" onclick="toggleMenu()">Plans</a>
+    <button class="btn-primary" onclick="scrollToScan();toggleMenu()">Try Free Scan</button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span>AI-Powered Skin Intelligence</div>
+    <h1 class="hero-title">
+      Your Skin.<br/>
+      <em>Decoded by AI.</em>
+    </h1>
+    <p class="hero-sub">One scan. A lifetime of personalized beauty intelligence. LUMINA reads your unique skin fingerprint and crafts a regimen made only for you.</p>
+    <div class="hero-actions">
+      <button class="btn-hero" onclick="scrollToScan()">
+        <span class="btn-icon">◎</span> Start Free Scan
+      </button>
+      <button class="btn-ghost-hero" onclick="playDemo()">
+        <span class="play-icon">▶</span> See How It Works
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">2.4M+</span><span class="stat-label">Scans Done</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Accuracy Rate</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Skin Metrics</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="face-scan-display">
+      <div class="scan-ring scan-ring-1"></div>
+      <div class="scan-ring scan-ring-2"></div>
+      <div class="scan-ring scan-ring-3"></div>
+      <div class="face-orb">
+        <div class="face-dots"></div>
+        <div class="scan-beam"></div>
+        <div class="face-emoji">🧖‍♀️</div>
+      </div>
+      <div class="scan-point sp1"><span>Texture</span></div>
+      <div class="scan-point sp2"><span>Hydration</span></div>
+      <div class="scan-point sp3"><span>Tone</span></div>
+      <div class="scan-point sp4"><span>Pores</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES STRIP ═══ -->
+<div class="features-strip">
+  <div class="strip-inner">
+    <div class="strip-item"><span class="strip-icon">🔬</span>50+ Skin Metrics</div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><span class="strip-icon">💡</span>AI Recommendations</div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><span class="strip-icon">🧘‍♀️</span>Face Yoga Plans</div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><span class="strip-icon">📓</span>Skin Diary</div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><span class="strip-icon">📄</span>PDF Skin Report</div>
+  </div>
+</div>
+
+<!-- ═══ SCAN SECTION ═══ -->
+<section class="scan-section" id="scan">
+  <div class="section-label">Step 01 — Face Scan</div>
+  <h2 class="section-title">Upload or Capture<br/><em>Your Face Scan</em></h2>
+  <p class="section-sub">Our AI analyzes 50+ skin metrics from a single photo. No special equipment needed.</p>
+
+  <!-- Scan Limit Banner -->
+  <div class="scan-limit-banner">
+    <span class="limit-icon">✦</span>
+    <span id="scanLimitText">You have <strong>3 free scans</strong> remaining this month</span>
+    <button class="upgrade-inline" onclick="showPricing()">Upgrade for Unlimited →</button>
+  </div>
+
+  <div class="scan-container">
+    <!-- Upload Tab -->
+    <div class="scan-tabs">
+      <button class="scan-tab active" id="tab-upload" onclick="switchTab('upload')">📤 Upload Photo</button>
+      <button class="scan-tab" id="tab-camera" onclick="switchTab('camera')">📷 Live Camera</button>
+    </div>
+
+    <div class="scan-panel" id="panel-upload">
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()"
+           ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+        <div class="upload-icon">◎</div>
+        <div class="upload-title">Drop your photo here</div>
+        <div class="upload-sub">or click to browse — JPG, PNG, WEBP accepted</div>
+        <div class="upload-tips">
+          <span>💡 Best results: Face well-lit, no glasses, front-facing</span>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(event)" />
+      </div>
+      <div class="preview-container" id="previewContainer" style="display:none">
+        <img id="previewImg" src="" alt="Preview" class="preview-img" />
+        <div class="preview-overlay">
+          <div class="scan-line"></div>
+        </div>
+        <button class="remove-btn" onclick="removePhoto()">✕ Remove</button>
+      </div>
+    </div>
+
+    <div class="scan-panel" id="panel-camera" style="display:none">
+      <div class="camera-container" id="cameraContainer">
+        <video id="videoEl" autoplay playsinline class="video-el" style="display:none"></video>
+        <canvas id="canvasEl" style="display:none"></canvas>
+        <div class="camera-placeholder" id="cameraPlaceholder">
+          <div class="camera-icon">📷</div>
+          <p>Click below to activate your camera</p>
+        </div>
+        <img id="capturedPhoto" src="" alt="Captured" class="preview-img" style="display:none" />
+      </div>
+      <div class="camera-controls">
+        <button class="btn-camera" id="startCameraBtn" onclick="startCamera()">Activate Camera</button>
+        <button class="btn-camera" id="captureBtn" onclick="capturePhoto()" style="display:none">📸 Capture</button>
+        <button class="btn-camera" id="retakeBtn" onclick="retakePhoto()" style="display:none">🔄 Retake</button>
+      </div>
+    </div>
+
+    <div class="skin-context">
+      <h3 class="context-title">Tell us a bit about your skin</h3>
+      <div class="context-grid">
+        <div class="context-group">
+          <label>Age Range</label>
+          <select id="ageRange" class="context-input">
+            <option value="">Select...</option>
+            <option>18–25</option><option>26–32</option><option>33–40</option>
+            <option>41–50</option><option>50+</option>
+          </select>
+        </div>
+        <div class="context-group">
+          <label>Primary Concern</label>
+          <select id="primaryConcern" class="context-input">
+            <option value="">Select...</option>
+            <option>Acne &amp; Breakouts</option><option>Dryness</option>
+            <option>Oiliness</option><option>Aging &amp; Fine Lines</option>
+            <option>Dark Spots</option><option>Dullness</option>
+            <option>Sensitivity</option>
+          </select>
+        </div>
+        <div class="context-group">
+          <label>Skin Type</label>
+          <select id="skinType" class="context-input">
+            <option value="">Select...</option>
+            <option>Dry</option><option>Oily</option><option>Combination</option>
+            <option>Normal</option><option>Sensitive</option>
+          </select>
+        </div>
+        <div class="context-group">
+          <label>Current Routine</label>
+          <select id="currentRoutine" class="context-input">
+            <option value="">Select...</option>
+            <option>None / Minimal</option><option>Basic (wash + moisturize)</option>
+            <option>Moderate (serum + SPF)</option><option>Advanced (multi-step)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-analyze" id="analyzeBtn" onclick="runAnalysis()">
+      <span class="analyze-icon">✦</span>
+      <span id="analyzeBtnText">Analyze My Skin</span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══ RESULTS SECTION ═══ -->
+<section class="results-section" id="results" style="display:none">
+  <div class="results-header">
+    <div class="section-label">Step 02 — Your Analysis</div>
+    <h2 class="section-title">Your Skin<br/><em>Intelligence Report</em></h2>
+    <div class="overall-score-card">
+      <div class="score-ring">
+        <svg viewBox="0 0 120 120" class="score-svg">
+          <circle cx="60" cy="60" r="50" class="score-bg-circle"/>
+          <circle cx="60" cy="60" r="50" class="score-fill-circle" id="scoreCircle"/>
+        </svg>
+        <div class="score-center">
+          <span class="score-num" id="overallScore">82</span>
+          <span class="score-label">Skin Score</span>
+        </div>
+      </div>
+      <div class="score-meta">
+        <div class="score-grade" id="scoreGrade">Radiant</div>
+        <p id="scoreDescription">Your skin is healthy and well-balanced with a few targetable concerns. With the right routine, you can achieve luminous, glass-skin results.</p>
+        <div class="score-badges">
+          <span class="badge green">✓ Good Hydration</span>
+          <span class="badge amber">⚡ Mild Texture</span>
+          <span class="badge red">↑ Dark Spots</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metrics Grid -->
+  <div class="metrics-section">
+    <h3 class="metrics-title">Detailed Skin Metrics</h3>
+    <div class="metrics-grid" id="metricsGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- Face Shape -->
+  <div class="face-shape-section">
+    <h3 class="shape-title">Detected Face Shape</h3>
+    <div class="shapes-row" id="shapesRow">
+      <div class="shape-card active" data-shape="oval">
+        <div class="shape-icon">🥚</div>
+        <div class="shape-name">Oval</div>
+      </div>
+      <div class="shape-card" data-shape="round">
+        <div class="shape-icon">⭕</div>
+        <div class="shape-name">Round</div>
+      </div>
+      <div class="shape-card" data-shape="square">
+        <div class="shape-icon">⬜</div>
+        <div class="shape-name">Square</div>
+      </div>
+      <div class="shape-card" data-shape="heart">
+        <div class="shape-icon">❤️</div>
+        <div class="shape-name">Heart</div>
+      </div>
+      <div class="shape-card" data-shape="diamond">
+        <div class="shape-icon">💎</div>
+        <div class="shape-name">Diamond</div>
+      </div>
+    </div>
+    <p class="shape-description" id="shapeDescription">Your oval face is the most versatile shape. You have balanced proportions that work well with most hairstyles and makeup techniques. Enhance your natural symmetry with contouring along the sides.</p>
+  </div>
+
+  <!-- Product Recommendations -->
+  <div class="recommendations-section" id="recommendations">
+    <div class="section-label">Step 03 — Products</div>
+    <h3 class="section-title">Your Personalized<br/><em>Product Plan</em></h3>
+    <div class="rec-tabs">
+      <button class="rec-tab active" onclick="showRecTab(this,'am')">☀️ AM Routine</button>
+      <button class="rec-tab" onclick="showRecTab(this,'pm')">🌙 PM Routine</button>
+      <button class="rec-tab" onclick="showRecTab(this,'weekly')">📅 Weekly</button>
+    </div>
+    <div class="rec-grid" id="recGrid">
+      <!-- Populated by JS -->
+    </div>
+    <div class="avoid-section">
+      <h4 class="avoid-title">⚠️ Ingredients to Avoid for Your Skin</h4>
+      <div class="avoid-chips" id="avoidChips">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXERCISES SECTION ═══ -->
+<section class="exercises-section" id="exercises">
+  <div class="section-label">Step 04 — Face Yoga</div>
+  <h2 class="section-title">Your Daily<br/><em>Facial Exercise Plan</em></h2>
+  <p class="section-sub">Targeted facial yoga to lift, define, and rejuvenate. 8 minutes daily, life-changing results.</p>
+
+  <div class="exercise-plan-header">
+    <div class="plan-stat"><span>⏱️</span><strong>8 min</strong><span>Daily</span></div>
+    <div class="plan-stat"><span>🎯</span><strong>6</strong><span>Exercises</span></div>
+    <div class="plan-stat"><span>📈</span><strong>21 days</strong><span>To See Results</span></div>
+  </div>
+
+  <div class="exercises-grid" id="exercisesGrid">
+    <!-- Populated by JS -->
+  </div>
+
+  <div class="exercise-modal" id="exerciseModal" style="display:none">
+    <div class="modal-overlay" onclick="closeExerciseModal()"></div>
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeExerciseModal()">✕</button>
+      <div class="modal-icon" id="modalIcon"></div>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-steps" id="modalSteps"></div>
+      <div class="modal-timer">
+        <div class="timer-display" id="timerDisplay">0:30</div>
+        <button class="btn-primary" id="timerBtn" onclick="startExerciseTimer()">Start</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKIN DIARY ═══ -->
+<section class="diary-section" id="diary">
+  <div class="section-label">Step 05 — Skin Diary</div>
+  <h2 class="section-title">Your Face Profile<br/><em>Notebook</em></h2>
+  <p class="section-sub">Your personalized skin blueprint — saved, trackable, and always evolving.</p>
+
+  <div class="diary-container">
+    <div class="diary-card needs-card">
+      <div class="diary-card-header">
+        <span class="diary-icon">✅</span>
+        <h3>What Your Skin NEEDS</h3>
+      </div>
+      <ul class="diary-list" id="needsList">
+        <!-- Populated by JS -->
+      </ul>
+    </div>
+    <div class="diary-card avoid-card">
+      <div class="diary-card-header">
+        <span class="diary-icon">❌</span>
+        <h3>What Your Skin Should AVOID</h3>
+      </div>
+      <ul class="diary-list" id="avoidList">
+        <!-- Populated by JS -->
+      </ul>
+    </div>
+  </div>
+
+  <div class="diary-history">
+    <h3 class="history-title">Scan History & Progress</h3>
+    <div class="history-timeline" id="historyTimeline">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <div class="diary-download">
+    <div class="download-card">
+      <div class="download-icon">📄</div>
+      <div class="download-text">
+        <h4>Download Full Skin Report</h4>
+        <p>A comprehensive PDF with all metrics, recommendations, and your personalized routine</p>
+      </div>
+      <div class="premium-lock">
+        <button class="btn-premium" onclick="downloadReport()">
+          <span>✦</span> Download PDF — Premium
+        </button>
+        <span class="lock-note">Upgrade to access</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="pricing-section" id="pricing">
+  <div class="section-label">Plans & Pricing</div>
+  <h2 class="section-title">Invest in Your<br/><em>Best Skin Ever</em></h2>
+  <p class="section-sub">Start free. Upgrade when you're glowing.</p>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">Free</div>
+      <div class="price-amount"><span class="price-currency">$</span>0<span class="price-period">/mo</span></div>
+      <p class="price-desc">Perfect to get started with LUMINA</p>
+      <ul class="price-features">
+        <li>✓ 3 Skin Scans per month</li>
+        <li>✓ Basic skin metrics</li>
+        <li>✓ Product category suggestions</li>
+        <li>✓ Face yoga plan</li>
+        <li class="disabled">✗ PDF Skin Report</li>
+        <li class="disabled">✗ Scan history tracking</li>
+        <li class="disabled">✗ Ingredient deep-dive</li>
+        <li class="disabled">✗ Brand recommendations</li>
+      </ul>
+      <button class="btn-price" onclick="scrollToScan()">Start Free</button>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-badge">Most Popular ✦</div>
+      <div class="price-tier">Lumina Pro</div>
+      <div class="price-amount"><span class="price-currency">$</span>9.99<span class="price-period">/mo</span></div>
+      <p class="price-desc">The full skin intelligence experience</p>
+      <ul class="price-features">
+        <li>✓ Unlimited Skin Scans</li>
+        <li>✓ 50+ detailed skin metrics</li>
+        <li>✓ AI product recommendations</li>
+        <li>✓ Face yoga with guided timer</li>
+        <li>✓ PDF Skin Report download</li>
+        <li>✓ Full scan history & tracking</li>
+        <li>✓ Ingredient deep-dive analysis</li>
+        <li>✓ Curated brand recommendations</li>
+      </ul>
+      <button class="btn-price featured-btn" onclick="subscribePro()">Get Lumina Pro</button>
+    </div>
+
+    <div class="price-card">
+      <div class="price-tier">Brand Partner</div>
+      <div class="price-amount"><span class="price-currency">$</span>299<span class="price-period">/mo</span></div>
+      <p class="price-desc">Feature your products to targeted skin profiles</p>
+      <ul class="price-features">
+        <li>✓ Featured product placement</li>
+        <li>✓ Targeted skin-type matching</li>
+        <li>✓ Analytics dashboard</li>
+        <li>✓ Affiliate link integration</li>
+        <li>✓ 10,000+ monthly impressions</li>
+        <li>✓ Custom brand profile</li>
+        <li>✓ API access</li>
+        <li>✓ Dedicated account manager</li>
+      </ul>
+      <button class="btn-price" onclick="contactBrand()">Contact Sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="testimonials-section">
+  <div class="section-label">Social Proof</div>
+  <h2 class="section-title">Real People,<br/><em>Real Transformations</em></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"LUMINA told me to avoid alcohol-based toners and switch to a ceramide moisturizer. In 3 weeks, my dryness was basically gone. This AI is scary accurate."</p>
+      <div class="testimonial-author">
+        <div class="avatar" style="background: linear-gradient(135deg,#f093fb,#f5576c)">S</div>
+        <div><strong>Sophia L.</strong><span>28, New York</span></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"The face yoga plan is incredible. My jawline looks so much more defined after 4 weeks. Combined with the niacinamide they recommended, I'm literally glowing."</p>
+      <div class="testimonial-author">
+        <div class="avatar" style="background: linear-gradient(135deg,#4facfe,#00f2fe)">P</div>
+        <div><strong>Priya M.</strong><span>34, London</span></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★☆</div>
+      <p class="testimonial-text">"Finally a skincare app that doesn't just guess. The Skin Diary feature keeps me accountable and the PDF report made my dermatologist appointment so much more productive."</p>
+      <div class="testimonial-author">
+        <div class="avatar" style="background: linear-gradient(135deg,#43e97b,#38f9d7)">R</div>
+        <div><strong>Rachel K.</strong><span>41, Toronto</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo"><span class="logo-icon">✦</span><span class="logo-text">LUMINA</span></div>
+      <p>AI-powered skin intelligence for the beauty-conscious generation.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">𝕏</a>
+        <a href="#" class="social-link">📸</a>
+        <a href="#" class="social-link">🎵</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col"><h4>Product</h4>
+        <a href="#scan">Skin Scan</a><a href="#results">Analysis</a>
+        <a href="#exercises">Face Yoga</a><a href="#diary">Skin Diary</a>
+      </div>
+      <div class="footer-col"><h4>Company</h4>
+        <a href="#">About</a><a href="#">Blog</a>
+        <a href="#">Careers</a><a href="#">Press</a>
+      </div>
+      <div class="footer-col"><h4>Legal</h4>
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a><a href="#">GDPR</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 LUMINA AI Inc. All rights reserved. Powered by Claude Vision API.</p>
+    <p class="disclaimer">LUMINA is not a medical service. Consult a dermatologist for medical skin concerns.</p>
+  </div>
+</footer>
+
+<!-- ═══ MODALS ═══ -->
+<div class="modal-backdrop" id="loginModal" style="display:none">
+  <div class="auth-modal">
+    <button class="modal-close" onclick="hideLogin()">✕</button>
+    <div class="auth-logo"><span class="logo-icon">✦</span> LUMINA</div>
+    <h3>Welcome Back</h3>
+    <p>Sign in to access your Skin Diary and continue your journey</p>
+    <input type="email" placeholder="Email address" class="auth-input" />
+    <input type="password" placeholder="Password" class="auth-input" />
+    <button class="btn-primary full-width">Sign In</button>
+    <div class="auth-divider">or</div>
+    <button class="btn-social">🌐 Continue with Google</button>
+    <p class="auth-switch">Don't have an account? <a href="#" onclick="hideLogin()">Sign up free</a></p>
+  </div>
+</div>
+
+<!-- ═══ TOAST ═══ -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══ LOADING OVERLAY ═══ -->
+<div class="loading-overlay" id="loadingOverlay" style="display:none">
+  <div class="loading-content">
+    <div class="loading-rings">
+      <div class="loading-ring"></div>
+      <div class="loading-ring r2"></div>
+      <div class="loading-ring r3"></div>
+    </div>
+    <div class="loading-icon">✦</div>
+    <h3 class="loading-title">Analyzing Your Skin</h3>
+    <div class="loading-steps">
+      <div class="loading-step" id="ls1">◎ Detecting facial structure...</div>
+      <div class="loading-step" id="ls2">◎ Measuring hydration levels...</div>
+      <div class="loading-step" id="ls3">◎ Identifying skin concerns...</div>
+      <div class="loading-step" id="ls4">◎ Generating personalized plan...</div>
+    </div>
+    <div class="loading-progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
